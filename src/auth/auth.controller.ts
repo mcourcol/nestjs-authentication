@@ -17,6 +17,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   async login(@Request() req: any) {
-    return req.user;
+    const token = await this.authService.login(
+      req.user.id,
+      req.user.firstName,
+      req.user.lastName,
+    );
+    return { user: req.user, token };
   }
 }
