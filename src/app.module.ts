@@ -4,16 +4,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DummyModule } from './models/dummy/dummy.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { sqliteConfig } from './config/database.config';
 import { UserModule } from './models/user/user.module';
 import { AuthModule } from './auth/auth.module';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      expandVariables: true,
+      load: [databaseConfig],
     }),
-    TypeOrmModule.forRoot(sqliteConfig),
+    TypeOrmModule.forRootAsync({
+      useFactory: databaseConfig,
+    }),
     DummyModule,
     UserModule,
     AuthModule,
