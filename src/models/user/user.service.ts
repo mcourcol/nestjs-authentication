@@ -22,6 +22,12 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
+  async findByEmail(email: string) {
+    return await this.UserRepo.findOne({
+      where: { email },
+    });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     const user = this.UserRepo.create(updateUserDto);
     return this.UserRepo.save(user);

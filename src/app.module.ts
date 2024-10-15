@@ -6,6 +6,7 @@ import { DummyModule } from './models/dummy/dummy.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { sqliteConfig } from './config/database.config';
 import { UserModule } from './models/user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserModule } from './models/user/user.module';
     TypeOrmModule.forRoot(sqliteConfig),
     DummyModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
