@@ -21,7 +21,7 @@ export class UserService {
   findOne(id: number) {
     return this.UserRepo.findOne({
       where: { id },
-      select: ['id', 'firstName', 'lastName', 'email'],
+      select: ['id', 'firstName', 'lastName', 'email', 'refreshToken'],
     });
   }
 
@@ -38,5 +38,9 @@ export class UserService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  updateRefreshToken(id: number, hashedRefreshToken: string) {
+    return this.UserRepo.update(id, { refreshToken: hashedRefreshToken });
   }
 }

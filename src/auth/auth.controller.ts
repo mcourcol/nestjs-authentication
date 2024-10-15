@@ -9,6 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from '../common/guards/local-auth.guard';
 import { RefreshJwtAuthGuard } from 'src/common/guards/refresh-jwt-auth.guard';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -34,5 +35,11 @@ export class AuthController {
       req.user.firstName,
       req.user.lastName,
     );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('signout')
+  async signout(@Request() req: any) {
+    await this.authService.signOut(req.user.id);
   }
 }
