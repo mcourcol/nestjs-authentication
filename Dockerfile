@@ -12,6 +12,7 @@ USER node
 # Build for production #
 ########################
 FROM node:current-alpine AS build
+LABEL stage=build
 WORKDIR /app
 COPY --chown=node:node package*.json /app/
 COPY --chown=node:node --from=development /app/node_modules /app/node_modules
